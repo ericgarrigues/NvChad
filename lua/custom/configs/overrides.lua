@@ -13,11 +13,14 @@ M.treesitter = {
     "c",
     "markdown",
     "markdown_inline",
+    "yaml",
   },
   indent = {
     enable = true,
     disable = {
-      "python"
+      "python",
+      "yaml",
+      "ansible"
     },
   },
 }
