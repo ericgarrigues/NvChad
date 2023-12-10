@@ -6,3 +6,4 @@
 --   command = "tabdo wincmd =",
 -- })
 vim.opt.cc = "80,120"
+vim.opt.textwidth = 80
