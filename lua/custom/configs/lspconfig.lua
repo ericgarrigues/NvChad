@@ -13,5 +13,29 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+lspconfig.ansiblels.setup{
+  filetypes = { "yaml.ansible", "yaml" },
+  settings = {
+    ansible = {
+      ansible = {
+        path = "ansible"
+      },
+      executionEnvironment = {
+        enabled = false
+      },
+      python = {
+        interpreterPath = "python"
+      },
+      validation = {
+        enabled = true,
+        lint = {
+          enabled = true,
+          path = "ansible-lint"
+        }
+      }
+    }
+  }
+}
+
 -- 
 -- lspconfig.pyright.setup { blabla}
