@@ -47,6 +47,79 @@ local plugins = {
     end,
   },
 
+   ["jose-elias-alvarez/null-ls.nvim"] = {
+    after = "nvim-lspconfig",
+    config = function()
+      require "custom.plugins.null-ls"
+    end,
+  },
+
+  ["williamboman/nvim-lsp-installer"] = {
+    event = "BufRead",
+    config = function()
+      local lsp_installer = require("nvim-lsp-installer")
+
+        lsp_installer.on_server_ready(function(server)
+        local opts = {}
+        server:setup(opts)
+        vim.cmd([[ do User LspAttachBuffers ]])
+      end)
+    end,
+  },
+
+  -- Rainbow indent plugin
+  ["p00f/nvim-ts-rainbow"] = {
+    event = "BufRead",
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        rainbow = {
+          enable = true,
+          extended_mode = true,
+          max_file_lines = nil,
+        },
+      }
+    end,
+  },
+
+  -- Rainbow brackets plugin
+  ["lukas-reineke/indent-blankline.nvim"] = {
+    event = "BufRead",
+    config = function()
+      require("indent_blankline").setup {
+        use_treesitter = true,
+        space_char_blankline = " ",
+        show_current_context_start = true,
+        char_highlight_list = {
+          "IndentBlanklineIndent1",
+          "IndentBlanklineIndent2",
+          "IndentBlanklineIndent3",
+          "IndentBlanklineIndent4",
+          "IndentBlanklineIndent5",
+          "IndentBlanklineIndent6",
+        },
+        show_current_context = true,
+        filetype_exclude = { "help", "dashboard", "dashpreview", "NvimTree", "vista", "sagahover" },
+        buftype_exclude = { "terminal", "nofile" },
+        context_patterns = {
+          "class",
+          "function",
+          "method",
+          "block",
+          "list_literal",
+          "selector",
+          "^if",
+          "^table",
+          "if_statement",
+          "while",
+          "for",
+          "loop",
+          "fn",
+          "func",
+        },
+      }
+    end,
+  },
+
   {
   "ericgarrigues/ogpt.nvim",
     event = "VeryLazy",
